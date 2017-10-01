@@ -1,0 +1,20 @@
+{
+    "name": "zonuexe/phpcon2017-error-processing",
+    "description": "Sample code for “ここで差がつくエラー処理” talk in Japan PHP Conference 2017.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "USAMI Kenta",
+            "role": "Developer"
+        }
+    ],
+    "license": "Apache-2.0",
+    "require": {
+        "filp/whoops": "^2.1",
+        "monolog/monolog": "^1.23",
+        "psy/psysh": "^0.8.11",
+        "rollbar/rollbar": "~1.1",
+        "twig/twig": "^1.35",
+        "zonuexe/simple-routing": "^0.5.3"
+    }
+}
