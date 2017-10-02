@@ -9,6 +9,12 @@
         }
     ],
     "license": "Apache-2.0",
+    "autoload": {
+        "files": ["src/functions.php"],
+        "psr-4": {
+            "zonuexe\\PhpCon2017\\": "src/"
+        }
+    },
     "require": {
         "filp/whoops": "^2.1",
         "monolog/monolog": "^1.23",
