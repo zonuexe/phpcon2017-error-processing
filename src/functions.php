@@ -127,3 +127,18 @@ function view($tpl_name, array $data = [])
         return twig()->render("{$tpl_name}.html.tpl", $data);
     };
 }
+
+/**
+ * @return \Whoops\Run
+ */
+function whoops()
+{
+    /** @var \Whoops\Run */
+    static $whoops;
+
+    if ($whoops === null) {
+        $whoops = new \Whoops\Run;
+    }
+
+    return $whoops;
+}
