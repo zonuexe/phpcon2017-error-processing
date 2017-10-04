@@ -1,0 +1,7 @@
+<?php
+
+return [
+    'cookie.session_name'   => 'ZONUSESSID',
+    'cookie.save_key'       => 'x',
+    'cookie.crypt_key_salt' => 'hogehoge',
+];
