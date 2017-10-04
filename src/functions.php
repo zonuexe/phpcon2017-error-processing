@@ -79,9 +79,28 @@ function twig()
             'cache' => $basedir . '/cache/twig',
             'debug' => true,
         ]);
-        $twig->addFunction(new \Twig_SimpleFunction('url_to', function ($name, array $param = []) {
-            return router()->makePath($name, $param, true);
-        }));
+
+        $twig->addFunction(new \Twig_SimpleFunction(
+            'url_to', function ($name, array $param = []) {
+                return router()->makePath($name, $param, true);
+            }));
+
+        $twig->addFunction(new \Twig_SimpleFunction(
+            'feature_value', function ($value) {
+                $in_array = is_array($value);
+                $values = array_map(function ($v) {
+                    if ($v === true)  return 'true';
+                    if ($v === false) return 'false';
+
+                    if (is_string($v)) {
+                        return sprintf('"%s"', $v);
+                    }
+
+                    return (string)$v;
+                }, $in_array ? $value : [$value]);
+
+                return $in_array ? $values : $values[0];
+            }));
     }
 
     return $twig;
@@ -101,6 +120,10 @@ function view($tpl_name, array $data = [])
     }
 
     return function () use ($tpl_name, $data) {
-        echo twig()->render("{$tpl_name}.html.tpl", $data);
+        $data = [
+            'features' => Features::fromArray($_SESSION['features']),
+        ] + $data;
+
+        return twig()->render("{$tpl_name}.html.tpl", $data);
     };
 }
