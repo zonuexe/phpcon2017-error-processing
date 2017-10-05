@@ -12,6 +12,7 @@ final class Features implements \IteratorAggregate, \ArrayAccess
 {
     private static $KNOWN_FEATURES = [
         Feature\SetErrorReporting::class => ['E_ALL', 'E_ALL & ~E_NOTICE'],
+        Feature\SetErrorHandler::class => [false, true],
         Feature\AddWhoopsHandler::class => ['', 'PrettyPageHandler'],
         Feature\TurnOnWhoops::class => [false, true],
     ];
@@ -33,6 +34,16 @@ final class Features implements \IteratorAggregate, \ArrayAccess
         $this->features = $a;
     }
 
+    public function executeAll()
+    {
+        foreach ($this->features as $feature) {
+            $feature->execute($this);
+        }
+    }
+
+    /**
+     * @return Features
+     */
     public static function fromArray(array $source)
     {
         $features = [];
@@ -45,6 +56,19 @@ final class Features implements \IteratorAggregate, \ArrayAccess
         }
 
         return new Features($features);
+    }
+
+    public static function getAvailableValues()
+    {
+        $available_values = [];
+
+        foreach (Features::$KNOWN_FEATURES as $class => $values) {
+            $ns = explode('\\', $class);
+
+            $available_values[array_pop($ns)] = $values;
+        }
+
+        return $available_values;
     }
 
     /**
