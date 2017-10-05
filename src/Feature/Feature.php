@@ -16,6 +16,10 @@ abstract class Feature
     /** @var mixed */
     private $value;
 
+    /**
+     * @param string $key
+     * @param mixed  $value
+     */
     public function __construct($key, $value)
     {
         $this->key = $key;
@@ -30,10 +34,5 @@ abstract class Feature
     public function __isset($name)
     {
         return isset($this->$name);
-    }
-
-    private static function className($name)
-    {
-        return sprintf('\%s\Feature\%s',  __NAMESPACE__, $name);
     }
 }

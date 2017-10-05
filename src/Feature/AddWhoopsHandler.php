@@ -2,17 +2,23 @@
 
 namespace zonuexe\PhpCon2017\Feature;
 
+use zonuexe\PhpCon2017\Features;
+
 final class AddWhoopsHandler extends Feature
 {
     public function execute(Features $features)
     {
         if ($this->value) {
-            \zonuexe\PhpCon2017\whoops()->pushHandler($this->getHanlder());
+            whoops()->pushHandler($this->getHandler());
         }
     }
 
-    private function getHanlder()
+    /**
+     * @return \Whoops\Handler\HandlerInterface
+     */
+    private function getHandler()
     {
         $class = sprintf('%s\%s', \Whoops\Handler::class, $this->value);
+        new $class;
     }
 }
