@@ -8,12 +8,11 @@
  * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache-2.0
  */
 
-namespace zonuexe\PhpCon2017;
-
 use Monolog\Logger;
 use Monolog\Handler\ChromePHPHandler;
 use Monolog\Handler\NullHandler;
 use Teto\Routing\Router;
+use zonuexe\PhpCon2017\Features;
 
 /**
  * @param  Router $router
